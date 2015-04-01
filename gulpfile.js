@@ -9,6 +9,12 @@ gulp.task('sass', function() {
       .pipe(gulp.dest('./css'));
 });
 
+gulp.task('copy-php', function() {
+  gulp.src('src/**/*.php')
+      .pipe(gulp.dest('theme'));
+});
+
 gulp.task('watch', function() {
   gulp.watch('./*.scss', ['sass']);
+  gulp.watch('src/**/*.php', ['copy-php']);
 });
