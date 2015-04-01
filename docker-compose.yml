@@ -1,5 +1,7 @@
 wordpress:
   image: wordpress
+  volumes:
+    - theme/:/var/www/html/wp-content/themes/theme/
   links:
     - db:mysql
   ports:
