@@ -1,25 +1,34 @@
 var gulp = require('gulp'),
-    sass = require('gulp-sass');
+    sass = require('gulp-sass'),
+    browserSync = require('browser-sync');
 
-var src_dir = 'src/',
-    sass_dir = 'src/scss/',
-    dest_dir = 'theme/',
-    css_dir = dest_dir + 'css/';
+var reload = browserSync.reload;
 
 gulp.task('default', ['watch']);
 
 gulp.task('sass', function() {
-  gulp.src(sass_dir + '**/*.scss')
+  return gulp.src('src/scss/style.scss')
       .pipe(sass())
-      .pipe(gulp.dest(css_dir));
+      .pipe(gulp.dest('theme'))
+      .pipe(reload({stream: true}));
 });
 
 gulp.task('php', function() {
-  gulp.src(src_dir + '**/*.php')
-      .pipe(gulp.dest(dest_dir));
+  return gulp.src('src/*.php')
+      .pipe(gulp.dest('theme'));
 });
 
-gulp.task('watch', function() {
-  gulp.watch(sass_dir + '**/*.scss', ['sass']);
-  gulp.watch(src_dir + '**/*.php', ['php']);
+gulp.task('watch', ['browser-sync'], function() {
+  gulp.watch('src/scss/**/*.scss', ['sass']);
+  
+  gulp.watch('src/*.php', ['php'])
+      .on('change', reload);
 });
+
+gulp.task('browser-sync', function() {
+  browserSync({
+    proxy: "localhost:8080"
+  });
+});
+
+gulp.task('build', ['sass', 'php']);
