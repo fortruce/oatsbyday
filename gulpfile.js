@@ -1,10 +1,10 @@
 var gulp = require('gulp'),
     sass = require('gulp-sass'),
+    del = require('del'),
+    path = require('path'),
     browserSync = require('browser-sync');
 
 var reload = browserSync.reload;
-
-gulp.task('default', ['watch']);
 
 gulp.task('sass', function() {
   return gulp.src('src/scss/style.scss')
@@ -21,8 +21,18 @@ gulp.task('php', function() {
 gulp.task('watch', ['browser-sync'], function() {
   gulp.watch('src/scss/**/*.scss', ['sass']);
   
-  gulp.watch('src/*.php', ['php'])
-      .on('change', reload);
+  gulp.watch('src/*.php', ['php']);
+
+  // If file is deleted in src/ delete in theme/ as well
+  gulp.watch('src/**/*.{php,scss}')
+      .on('change', function(event) {
+        if (event.type === 'deleted') {
+          var f = path.join('theme/',
+                            event.path.replace(process.cwd() + '/src/', ''));
+          console.log('deleting: ' + f);
+          del([f]);
+        }
+      });
 });
 
 gulp.task('browser-sync', function() {
@@ -32,3 +42,4 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('build', ['sass', 'php']);
+gulp.task('default', ['build', 'watch']);
