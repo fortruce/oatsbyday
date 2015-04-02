@@ -6,6 +6,12 @@ var gulp = require('gulp'),
 
 var reload = browserSync.reload;
 
+gulp.task('browser-sync', function() {
+  browserSync({
+    proxy: "localhost:8080"
+  });
+});
+
 gulp.task('sass', function() {
   return gulp.src('src/scss/style.scss')
       .pipe(sass())
@@ -34,12 +40,6 @@ gulp.task('watch', ['browser-sync'], function() {
           del([f]);
         }
       });
-});
-
-gulp.task('browser-sync', function() {
-  browserSync({
-    proxy: "localhost:8080"
-  });
 });
 
 gulp.task('build', ['sass', 'php']);
