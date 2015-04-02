@@ -1,4 +1,4 @@
-<php
+<?php
 /**
  * The index for our theme.
  *
@@ -6,6 +6,7 @@
  */
 ?>
 <?php get_header(); ?>
+
 
  <p>Hello World</p>
 
