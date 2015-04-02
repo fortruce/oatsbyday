@@ -26,6 +26,8 @@
     <div class="top-bar">
       <a class="logo" href="/"><?php bloginfo('name'); ?></a>
     </div>
+
+    <?php wp_nav_menu(array('theme_location' => 'header-menu')); ?>
   </header>
   
   <body <?php body_class(); ?>>
