@@ -21,7 +21,8 @@ gulp.task('php', function() {
 gulp.task('watch', ['browser-sync'], function() {
   gulp.watch('src/scss/**/*.scss', ['sass']);
   
-  gulp.watch('src/*.php', ['php']);
+  gulp.watch('src/*.php', ['php'])
+      .on('change', reload);
 
   // If file is deleted in src/ delete in theme/ as well
   gulp.watch('src/**/*.{php,scss}')
