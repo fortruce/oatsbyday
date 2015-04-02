@@ -7,3 +7,14 @@
 */
 
 @import 'styles/normalize';
+
+html { margin: 0; }
+
+.logo {
+    display: block;
+    color: white;
+    font-size: 50px;
+    background: blue;
+    padding: 50px;
+    margin: 0;
+}
