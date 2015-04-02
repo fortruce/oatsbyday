@@ -27,7 +27,9 @@
       <a class="logo" href="/"><?php bloginfo('name'); ?></a>
     </div>
 
-    <?php wp_nav_menu(array('theme_location' => 'header-menu')); ?>
+    <?php wp_nav_menu(array('theme_location' => 'header-menu',
+                            'container' => 'nav',
+                            'container_class' => 'main-menu')); ?>
   </header>
   
   <body <?php body_class(); ?>>
