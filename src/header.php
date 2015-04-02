@@ -12,7 +12,7 @@
 
   <head>
     <title>
-      <?php if (is_singular()) { echo the_title() . ' | '; }?>
+      <?php wp_title('|', true, 'right'); ?>
       Oats By Day
     </title>
     <?php wp_head(); ?>
