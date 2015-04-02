@@ -28,5 +28,5 @@
     </div>
   </header>
   
-  <body>
+  <body <?php body_class(); ?>>
     <div id="content">
