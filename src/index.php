@@ -7,13 +7,14 @@
 ?>
 <?php get_header(); ?>
 
-<section class="posts">
+<section class="collage">
     
     <?php if (have_posts()): while(have_posts()): the_post(); ?>
         
-        <article class="post">
-            <?php get_template_part('tmpl_post_header'); ?>
-            <p class="post__content"><?php the_excerpt(); ?></p>
+        <article class="collage__post">
+            <a class="collage__post__image" href="<?php the_permalink(); ?>">
+                <?php echo get_the_post_thumbnail(); ?>
+            </a>
         </article>
         
     <?php endwhile; else: ?>
