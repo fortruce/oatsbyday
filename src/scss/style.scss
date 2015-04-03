@@ -4,7 +4,7 @@
   Author URI: http://josephmr.com
   Description: The OatsByDay.com custom theme.
   Version: 0.1
-*/
+  */
 
 @import 'styles/normalize';
 
@@ -18,3 +18,27 @@ html { margin: 0; }
     padding: 50px;
     margin: 0;
 }
+
+.flex {
+    display: flex;
+}
+
+.sidebar {
+    min-width: 200px;
+    padding: 20px;
+}
+
+.search-form {
+    fieldset {
+        border: none;
+        margin: auto;
+        padding: 0;
+    }
+    
+    &__query {
+        width: 100%;
+        border: 1px solid #afafaf;
+     }
+}
+
+.hidden { display: none; }

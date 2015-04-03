@@ -26,12 +26,10 @@
     <div class="top-bar">
       <a class="logo" href="/"><?php bloginfo('name'); ?></a>
     </div>
-
-    <nav class="header-menu">
-        <?php wp_nav_menu(array('theme_location' => 'header-menu',
-                                'container' => false)); ?>
-    </nav>
   </header>
   
   <body <?php body_class(); ?>>
-    <div id="content">
+      <div class="flex">
+          <?php get_sidebar(); ?>
+          <div class="content">
+        
