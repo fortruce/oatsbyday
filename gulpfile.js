@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     del = require('del'),
     path = require('path'),
     autoprefixer = require('gulp-autoprefixer'),
+    shell = require('gulp-shell'),
     browserSync = require('browser-sync');
 
 var reload = browserSync.reload;
@@ -25,6 +26,19 @@ gulp.task('php', function() {
   return gulp.src('src/*.php')
       .pipe(gulp.dest('theme'));
 });
+
+gulp.task('docker-up', shell.task([
+  'docker-compose up -d --no-recreate']));
+
+gulp.task('docker-backup', shell.task([
+  'docker run --volumes-from oatsbyday_dbdata_1 --name backup -v $(pwd)/backup:/backup ubuntu tar cvf /backup/backup.tar /var/lib/mysql',
+  'docker rm backup']));
+
+gulp.task('docker-restore', shell.task([
+  'docker-compose stop && docker-compose rm --force',
+  'docker-compose up -d dbdata',
+  'docker run --name restore --volumes-from oatsbyday_dbdata_1 -v $(pwd)/backup:/backup busybox tar xvf /backup/backup.tar',
+  'docker rm restore']));
 
 gulp.task('watch', ['browser-sync'], function() {
   gulp.watch('src/scss/**/*.scss', ['sass']);
