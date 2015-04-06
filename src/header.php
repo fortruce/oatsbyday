@@ -29,7 +29,6 @@
   </header>
   
   <body <?php body_class(); ?>>
-      <div class="flex">
-          <?php get_sidebar(); ?>
-          <div class="content">
+      <?php get_sidebar(); ?>
+      <div class="content">
         

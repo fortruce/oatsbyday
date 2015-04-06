@@ -2,13 +2,12 @@
 /**
  * The footer for our theme.
  *
- * Displays all of the <footer> section and closes <div class="flex">
- * and <div class="content"> from header.
+ * Displays all of the <footer> section and closes
+ * <div class="content"> from header.
  *
  * @package oats
  */
 ?>
-        </div>
     </div>
 
     <footer>
