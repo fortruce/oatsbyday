@@ -2,6 +2,7 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     del = require('del'),
     path = require('path'),
+    autoprefixer = require('gulp-autoprefixer'),
     browserSync = require('browser-sync');
 
 var reload = browserSync.reload;
@@ -15,6 +16,7 @@ gulp.task('browser-sync', function() {
 gulp.task('sass', function() {
   return gulp.src('src/scss/style.scss')
       .pipe(sass())
+      .pipe(autoprefixer())
       .pipe(gulp.dest('theme'))
       .pipe(reload({stream: true}));
 });
