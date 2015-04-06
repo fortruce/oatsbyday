@@ -27,6 +27,11 @@ gulp.task('php', function() {
       .pipe(gulp.dest('theme'));
 });
 
+// necessary to delete all files in theme/ output folder before build tasks
+// to prevent permission errors.
+gulp.task('clear-theme', shell.task([
+  'rm -rf theme/*']));
+
 gulp.task('docker-up', shell.task([
   'docker-compose up -d --no-recreate']));
 
@@ -58,5 +63,5 @@ gulp.task('watch', ['browser-sync'], function() {
       });
 });
 
-gulp.task('build', ['sass', 'php']);
-gulp.task('default', ['build', 'watch']);
+gulp.task('build', ['clear-theme', 'sass', 'php']);
+gulp.task('default', ['docker-up', 'build', 'watch']);
