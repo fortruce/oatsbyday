@@ -30,5 +30,5 @@
   
   <body <?php body_class(); ?>>
       <?php get_sidebar(); ?>
-      <div class="content">
+      <section class="content">
         
