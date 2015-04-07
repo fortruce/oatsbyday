@@ -1,52 +1,49 @@
 /*
   Collage.scss
 
-  This file contains the styles used to create the photo
-  collage.
+This file contains the styles used to create the photo
+collage.
 
 */
 
 $margin-size: 1%;
 
-.collage {
+.layout {
+    margin: 0 auto;
+}
+
+.posts {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 auto;
+}
 
-    &__post {
-        flex: 1 0 100px;
-        flex-basis: 49%;
+.post {
+    margin: 0 $margin-size $margin-size 0;
+    flex: 1 0;
 
-        margin: 0 $margin-size $margin-size 0;
-            
-        &__title {
-            display: none;
-        }
+    &__title {
+        display: none;
+    }
+    
+    &__image {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
 
-        &__image {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
+    &--2 { flex-basis: 50% - $margin-size; }
+    &--3 { flex-basis: 33 - $margin-size; }
+    &--4 { flex-basis: 25 - $margin-size; }
+    &--3-of-5 { flex-basis: 60 - $margin-size; }
+    &--2-of-5 {
+        position: relative;
+        flex-basis: 40 - $margin-size;
+        overflow: hidden;
 
-        &--2 {
-            flex-basis: 50% - $margin-size;
-        }
-
-        &--3 { flex-basis: 33 - $margin-size; }
-        &--4 { flex-basis: 25 - $margin-size; }
-
-        &--3-of-5 { flex-basis: 60 - $margin-size; }
-        &--2-of-5 {
-            position: relative;
-            flex-basis: 40 - $margin-size;
-            overflow: hidden;
-
-            img {
-                position: absolute;
-                height: 100%;
-                width: auto;
-            }
+        img {
+            position: absolute;
+            height: 100%;
+            width: auto;
         }
     }
 }

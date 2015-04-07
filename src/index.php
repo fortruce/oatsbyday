@@ -12,7 +12,7 @@
                                '2', '2',
                                '4', '4', '4', '4');?>
 
-<section class="collage">
+<div class="posts">
     
     <?php
 
@@ -25,13 +25,13 @@
                    $query->the_post();
                    $i++; ?>
         
-        <article class="<?php echo 'collage__post collage__post--'. $collage_classes[$i]; ?>">
-            <h1 class="collage__post__title"><?php the_title(); ?></h1>
-            <a class="collage__post__link" href="<?php the_permalink(); ?>">
-                <?php
-                echo the_post_thumbnail('post-thumbnail',
-                             array('class' => 'collage__post__image')); ?>
-            </a>
+        <article class="<?php echo 'post post--'. $collage_classes[$i]; ?>">
+            <h1 class="post__title"><?php the_title(); ?></h1>
+                <a class="post__link" href="<?php the_permalink(); ?>">
+                    <?php
+                    echo the_post_thumbnail('post-thumbnail',
+                                            array('class' => 'post__image')); ?>
+                </a>
         </article>
         
     <?php endwhile; else: ?>
@@ -40,6 +40,6 @@
     
     <?php endif; ?>
     
-</section>
+</div>
 
 <?php get_footer(); ?>
