@@ -4,7 +4,10 @@ var gulp = require('gulp'),
     path = require('path'),
     autoprefixer = require('gulp-autoprefixer'),
     shell = require('gulp-shell'),
-    browserSync = require('browser-sync');
+    browserSync = require('browser-sync'),
+    svgo = require('gulp-svgo'),
+    cache = require('gulp-cached'),
+    scssLint = require('gulp-scss-lint');
 
 var reload = browserSync.reload;
 
@@ -12,6 +15,18 @@ gulp.task('browser-sync', function() {
   browserSync({
     proxy: "localhost:8080"
   });
+});
+
+gulp.task('svgo', function() {
+  gulp.src('src/svg/*.svg')
+      .pipe(svgo())
+      .pipe(gulp.dest('theme/svg'));
+});
+
+gulp.task('scsslint', function() {
+  gulp.src(['src/scss/**/*.scss', '!**/_*.scss'])
+      .pipe(cache('scsslint'))
+      .pipe(scssLint({'config': 'lint.yml'}));
 });
 
 gulp.task('sass', function() {
@@ -46,13 +61,16 @@ gulp.task('docker-restore', shell.task([
   'docker rm restore']));
 
 gulp.task('watch', ['browser-sync'], function() {
-  gulp.watch('src/scss/**/*.scss', ['sass']);
+  gulp.watch('src/scss/**/*.scss', ['sass', 'scsslint']);
   
   gulp.watch('src/*.php', ['php'])
       .on('change', reload);
 
+  gulp.watch('src/svg/*.svg', ['svgo'])
+      .on('change', reload);
+
   // If file is deleted in src/ delete in theme/ as well
-  gulp.watch('src/**/*.{php,scss}')
+  gulp.watch('src/**/*.{php,scss,svg}')
       .on('change', function(event) {
         if (event.type === 'deleted') {
           var f = path.join('theme/',
@@ -63,5 +81,5 @@ gulp.task('watch', ['browser-sync'], function() {
       });
 });
 
-gulp.task('build', ['clear-theme', 'sass', 'php']);
+gulp.task('build', ['clear-theme', 'sass', 'php', 'svgo']);
 gulp.task('default', ['docker-up', 'build', 'watch']);
