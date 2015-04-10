@@ -15,10 +15,11 @@ $title-background: #fff;
 
   .col {
     flex: 1 0;
-    margin: 0 $margin-size $margin-size 0;
+    margin: 0 $margin-size/2 $margin-size/2 0;
 
     &--2,
     &--3,
+    &--4,
     &--3-of-5,
     &--2-of-5 { flex-basis: 100%; }
   }
@@ -45,6 +46,7 @@ $title-background: #fff;
     
     .col--2 { flex-basis: 50 - $margin-size; }
     .col--3 { flex-basis: 33 - $margin-size; }
+    .col--4 { flex-basis: 25 - $margin-size; }
     .col--3-of-5 { flex-basis: 60 - $margin-size; }
     .col--2-of-5 { flex-basis: 40 - $margin-size; }
     .col--uneven-small {
@@ -59,24 +61,26 @@ $title-background: #fff;
       }
     }
     
-    .preview {
-      &__title {
-        background-color: $title-background;
-        bottom: 0;
-        display: block;
-        left: 0;
-        margin: 0;
-        max-height: 100%;
-        opacity: 0;
-        padding: 20px;
-        position: absolute;
-        transition: opacity .8s ease-in-out;
-        width: 100%;
-      }
+    .preview__title {
+      background-color: $title-background;
+      bottom: -100%;
+      display: block;
+      left: 0;
+      margin: 0;
+      max-height: 100%;
+      opacity: 0;
+      padding: 20px;
+      position: absolute;
+      transition: opacity .8s ease-in-out;
+      width: 100%;
+    }
 
-      &:hover .preview__title {
-        opacity: .7;
-      }
+    .preview:hover .preview__title {
+      // bottom change is a hack to make the titles
+      // not do opacity animation when screen size is
+      // changed b/w list and collage
+      bottom: 0;
+      opacity: .7;
     }
   }
 }
