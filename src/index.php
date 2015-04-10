@@ -7,32 +7,30 @@
 ?>
 <?php get_header(); ?>
 
-<?php $col_classes = array('3-of-5', '2-of-5 col--uneven-small',
-                           '3', '3', '3',
-                           '2', '2',
-                           '4', '4', '4', '4');?>
+<?php
+$col_classes = array('3-of-5', '2-of-5 col--uneven-small',
+                     '3', '3', '3',
+                     '2', '2',
+                     '4', '4', '4', '4');
+$col_length = count($col_classes);
+?>
 
 <div id="layout" class="layout layout--collage">
     
     <?php
-    $query = new WP_Query(array('post_type' => 'post',
-                                'posts_per_page' => 11));
+    $i = 0;
+    if(have_posts()):
+    while(have_posts() and $i < $col_length):
+         the_post();
+    ?>
 
-    if ($query->have_posts()):
-             $i = -1;
-    while($query->have_posts()):
-                  $query->the_post();
-    $i++; ?>
+        <?php set_query_var('col', 'col--' . $col_classes[$i]); ?>
+        <?php get_template_part('tmpl_post_preview'); ?>
         
-        <div class="<?php echo 'post col col--'. $col_classes[$i]; ?>">
-            <h1 class="post__title"><?php the_title(); ?></h1>
-            <a href="<?php the_permalink(); ?>">
-                <?php echo the_post_thumbnail('post-thumbnail',
-                                        array('class' => 'post__image')); ?>
-            </a>
-        </div>
-        
-    <?php endwhile; else: ?>
+    <?php
+        $i++;
+    endwhile;
+    else: ?>
     
     <p>Sorry, no posts were found.</p>
     
