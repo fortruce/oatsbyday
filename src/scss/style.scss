@@ -1,50 +1,60 @@
-/*
-  Theme Name: Oats By Day
-  Author: Joseph
-  Author URI: http://josephmr.com
-  Description: The OatsByDay.com custom theme.
-  Version: 0.1
-  */
+//
+//  Theme Name: Oats By Day
+//  Author: Joseph
+//  Author URI: http://josephmr.com
+//  Description: The OatsByDay.com custom theme.
+//  Version: 0.1
+//
 
 @import 'styles/normalize';
 @import 'styles/collage';
 
+$logo-color: #fff;
+$logo-background: #000;
+
+$light-grey: #afafaf;
+
+
+
 html {
-    margin: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
 }
-*, *:before, *:after { box-sizing: inherit; }
+
+*,
+*:before,
+*:after { box-sizing: inherit; }
 
 .logo {
-    display: block;
-    color: white;
-    font-size: 50px;
-    background: blue;
-    padding: 50px;
-    margin: 0;
+  background: $logo-background;
+  color: $logo-color;
+  display: block;
+  font-size: 50px;
+  margin: 0;
+  padding: 50px;
 }
 
 .sidebar {
-    min-width: 200px;
-    padding: 20px;
+  min-width: 200px;
+  padding: 20px;
 }
 
 .search-form {
-    fieldset {
-        border: none;
-        margin: auto;
-        padding: 0;
-    }
+  fieldset {
+    border: 0;
+    margin: auto;
+    padding: 0;
+  }
     
-    &__query {
-        width: 100%;
-        border: 1px solid #afafaf;
-     }
+  &__query {
+    border: 1px solid $light-grey;
+    width: 100%;
+  }
 }
 
 .content {
-    max-width: 70%;
-    margin: 0 auto;
+  margin: 0 auto;
+  max-width: 70%;
 }
 
 .hidden { display: none; }
