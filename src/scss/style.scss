@@ -9,7 +9,11 @@
 @import 'styles/normalize';
 @import 'styles/collage';
 
-html { margin: 0; }
+html {
+    margin: 0;
+    box-sizing: border-box;
+}
+*, *:before, *:after { box-sizing: inherit; }
 
 .logo {
     display: block;
