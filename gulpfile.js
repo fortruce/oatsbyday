@@ -52,13 +52,18 @@ gulp.task('docker-up', shell.task([
 
 gulp.task('docker-backup', shell.task([
   'docker run --volumes-from oatsbyday_dbdata_1 --name backup -v $(pwd)/backup:/backup ubuntu tar cvf /backup/backup.tar /var/lib/mysql',
-  'docker rm backup']));
+  'docker run --volumes-from oatsbyday_wordpress_1 --name backup2 -v $(pwd)/backup:/backup ubuntu tar cvf /backup/backup-content.tar /var/www/html/wp-content',
+  'docker rm backup',
+  'docker rm backup2']));
 
 gulp.task('docker-restore', shell.task([
   'docker-compose stop && docker-compose rm --force',
   'docker-compose up -d dbdata',
   'docker run --name restore --volumes-from oatsbyday_dbdata_1 -v $(pwd)/backup:/backup busybox tar xvf /backup/backup.tar',
-  'docker rm restore']));
+  'docker-compose up -d db wordpress',
+  'docker run --name restore2 --volumes-from oatsbyday_wordpress_1 -v $(pwd)/backup:/backup busybox tar xvf /backup/backup-content.tar',
+  'docker rm restore',
+  'docker rm restore2']));
 
 gulp.task('watch', ['browser-sync'], function() {
   gulp.watch('src/scss/**/*.scss', ['sass', 'scsslint']);
